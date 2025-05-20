@@ -5038,7 +5038,6 @@
           {
             "name": "FacilityId",
             "in": "query",
-            "required": true,
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -14913,55 +14912,6 @@
         }
       }
     },
-    "/api/Hospital/Invoicing/GetInvoiceSummary": {
-      "get": {
-        "tags": [
-          "Invoicing"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResponseModelOfGetInvoiceSummaryStatisticsQueryResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResponseModelOfGetInvoiceSummaryStatisticsQueryResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResponseModelOfGetInvoiceSummaryStatisticsQueryResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/Hospital/Invoicing/GetInvoicePeriodList": {
       "get": {
         "tags": [
@@ -17066,6 +17016,14 @@
             }
           },
           {
+            "name": "UserSendEmail",
+            "in": "query",
+            "description": "UserSendEmail, returns receivers with email is not empty",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "name": "Paging.PageSize",
             "in": "query",
             "description": "The number of records to show on a single page",
@@ -17170,6 +17128,14 @@
             "name": "SendAsTextMessage",
             "in": "query",
             "description": "SendAsTextMessage, returns receivers with mobile phone number is not empty",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "UserSendEmail",
+            "in": "query",
+            "description": "UserSendEmail, returns receivers with email is not empty",
             "schema": {
               "type": "boolean"
             }
@@ -17430,6 +17396,14 @@
             }
           },
           {
+            "name": "UserSendEmail",
+            "in": "query",
+            "description": "UserSendEmail, returns receivers with email is not empty",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "name": "Paging.PageSize",
             "in": "query",
             "description": "The number of records to show on a single page",
@@ -17559,6 +17533,14 @@
             "name": "SendAsTextMessage",
             "in": "query",
             "description": "SendAsTextMessage, returns receivers with mobile phone number is not empty",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "UserSendEmail",
+            "in": "query",
+            "description": "UserSendEmail, returns receivers with email is not empty",
             "schema": {
               "type": "boolean"
             }
@@ -18682,6 +18664,14 @@
         "summary": "Hospital Search Professionals, sorting fields supported: \"FirstName\",\"LastName\",\"PositionType\",\"System\",\"LastSignin\"",
         "parameters": [
           {
+            "name": "FirstName",
+            "in": "query",
+            "description": "Professional First Name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "LastName",
             "in": "query",
             "description": "Professional Last Name",
@@ -18752,6 +18742,26 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SearchProfessionalsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -34801,7 +34811,6 @@
           {
             "name": "FacilityId",
             "in": "query",
-            "required": true,
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -38962,35 +38971,6 @@
             "allOf": [
               {
                 "$ref": "#/components/schemas/GetFAQsResponse"
-              }
-            ],
-            "description": "Data that needs to return, could be a value or object when request is processed successfully, otherwise it will be null",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Base model of each response"
-      },
-      "BaseResponseModelOfGetInvoiceSummaryStatisticsQueryResponse": {
-        "type": "object",
-        "properties": {
-          "statusCode": {
-            "type": "integer",
-            "description": "Success = 10000 - Request is processed successfully\r\nFailed = 20000 - Request is processed but not successfully, due to certain reasons like validation failed \r\nException = 30000 - Exception occurred when request is processed, \r\nUpgradeRequired = 99999 - Need to upgrade mobile apps first, only applicable for mobile apps",
-            "format": "int32"
-          },
-          "message": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Message may need to show to end user when request is processed successfully or mobile app upgrade is required,\r\nor show to front-end developer why request fails or exception details",
-            "nullable": true
-          },
-          "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/GetInvoiceSummaryStatisticsQueryResponse"
               }
             ],
             "description": "Data that needs to return, could be a value or object when request is processed successfully, otherwise it will be null",
@@ -47580,28 +47560,6 @@
           },
           "showReOpenButton": {
             "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "GetInvoiceSummaryStatisticsQueryResponse": {
-        "type": "object",
-        "properties": {
-          "pendingAction": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "approved": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "rejected": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "processed": {
-            "type": "integer",
-            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -59160,6 +59118,12 @@
           },
           "isReceivedApproval": {
             "type": "boolean"
+          },
+          "requisitionFileType": {
+            "maxLength": 25,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
           },
           "receivedApprover": {
             "maxLength": 200,
