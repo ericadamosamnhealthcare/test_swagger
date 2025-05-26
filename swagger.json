@@ -498,9 +498,17 @@
             }
           },
           {
-            "name": "UserLastName",
+            "name": "LastName",
             "in": "query",
             "description": "User Last Name filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "FirstName",
+            "in": "query",
+            "description": "User First Name filter",
             "schema": {
               "type": "string"
             }
@@ -1353,6 +1361,143 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SelectableItems"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/GetBillingGroupContactOptions": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "IsActiveOnly",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "FacilityId",
+            "in": "query",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBillingGroupContactOptionsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBillingGroupContactOptionsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBillingGroupContactOptionsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/GetBillingGroupInvoiceApproverOptions": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "IsActiveOnly",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "FacilityId",
+            "in": "query",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBillingGroupInvoiceApproverOptionsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBillingGroupInvoiceApproverOptionsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBillingGroupInvoiceApproverOptionsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/GetBillingGroupContractOptions": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "BillingGroupId",
+            "in": "query",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBillingGroupContractOptionsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBillingGroupContractOptionsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBillingGroupContractOptionsResponse"
                 }
               }
             }
@@ -5038,6 +5183,7 @@
           {
             "name": "FacilityId",
             "in": "query",
+            "required": true,
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -5148,13 +5294,6 @@
               "minimum": 1,
               "type": "integer",
               "format": "int32"
-            }
-          },
-          {
-            "name": "RestrictedViewOnly",
-            "in": "query",
-            "schema": {
-              "type": "boolean"
             }
           }
         ],
@@ -14885,6 +15024,55 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BaseResponseModelOfSelectableItems"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Hospital/Invoicing/GetInvoiceSummary": {
+      "get": {
+        "tags": [
+          "Invoicing"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseModelOfGetInvoiceSummaryStatisticsQueryResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseModelOfGetInvoiceSummaryStatisticsQueryResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseModelOfGetInvoiceSummaryStatisticsQueryResponse"
                 }
               }
             }
@@ -34811,6 +34999,7 @@
           {
             "name": "FacilityId",
             "in": "query",
+            "required": true,
             "schema": {
               "maximum": 2147483647,
               "minimum": 1,
@@ -38971,6 +39160,35 @@
             "allOf": [
               {
                 "$ref": "#/components/schemas/GetFAQsResponse"
+              }
+            ],
+            "description": "Data that needs to return, could be a value or object when request is processed successfully, otherwise it will be null",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Base model of each response"
+      },
+      "BaseResponseModelOfGetInvoiceSummaryStatisticsQueryResponse": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "description": "Success = 10000 - Request is processed successfully\r\nFailed = 20000 - Request is processed but not successfully, due to certain reasons like validation failed \r\nException = 30000 - Exception occurred when request is processed, \r\nUpgradeRequired = 99999 - Need to upgrade mobile apps first, only applicable for mobile apps",
+            "format": "int32"
+          },
+          "message": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Message may need to show to end user when request is processed successfully or mobile app upgrade is required,\r\nor show to front-end developer why request fails or exception details",
+            "nullable": true
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GetInvoiceSummaryStatisticsQueryResponse"
               }
             ],
             "description": "Data that needs to return, could be a value or object when request is processed successfully, otherwise it will be null",
@@ -44203,6 +44421,123 @@
         },
         "additionalProperties": false
       },
+      "GetBillingGroupContactOptions": {
+        "type": "object",
+        "properties": {
+          "adminId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userFirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "userLastName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetBillingGroupContactOptionsResponse": {
+        "type": "object",
+        "properties": {
+          "billingGroupContacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetBillingGroupContactOptions"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetBillingGroupContractOptions": {
+        "type": "object",
+        "properties": {
+          "contractAssignmentId": {
+            "type": "integer",
+            "description": "Gets or sets the unique identifier for the contract assignment.",
+            "format": "int32"
+          },
+          "userFirstName": {
+            "type": "string",
+            "description": "Gets or sets the first name of the nurse user assigned to the contract.",
+            "nullable": true
+          },
+          "userLastName": {
+            "type": "string",
+            "description": "Gets or sets the last name of the nurse user assigned to the contract.",
+            "nullable": true
+          },
+          "contractAssignmentStartDateTime": {
+            "type": "string",
+            "description": "Gets or sets the start date and time of the contract assignment.",
+            "format": "date-time"
+          },
+          "contractAssignmentStartDate": {
+            "type": "string",
+            "description": "Gets or sets the start date of the contract assignment.",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents the options for a billing group contract assignment, including awarded nurse and assignment dates."
+      },
+      "GetBillingGroupContractOptionsResponse": {
+        "type": "object",
+        "properties": {
+          "billingGroupContracts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetBillingGroupContractOptions"
+            },
+            "description": "Gets or sets the collection of billing group contract options.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents the response containing a list of billing group contract options."
+      },
+      "GetBillingGroupInvoiceApproverOptions": {
+        "type": "object",
+        "properties": {
+          "adminId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userFirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "userLastName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetBillingGroupInvoiceApproverOptionsResponse": {
+        "type": "object",
+        "properties": {
+          "billingGroupInvoiceApprovers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetBillingGroupInvoiceApproverOptions"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "GetBillingGroupsSummaryItemResponse": {
         "type": "object",
         "properties": {
@@ -47564,6 +47899,28 @@
         },
         "additionalProperties": false
       },
+      "GetInvoiceSummaryStatisticsQueryResponse": {
+        "type": "object",
+        "properties": {
+          "pendingAction": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "approved": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rejected": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "processed": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "GetInvoiceTotalResponse": {
         "type": "object",
         "properties": {
@@ -49988,7 +50345,11 @@
             "nullable": true
           },
           "floatingRequirements": {
-            "type": "string",
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
             "description": "Floating Requirements, visible only for TN_ACROSS_AMERICA(7)",
             "nullable": true
           },
